@@ -70,13 +70,20 @@ call deoplete#custom#var('omni', 'input_patterns', {
       \ 'tex': g:vimtex#re#deoplete
       \})
 
+""""""""""""Enable syntax highlighting"""""""""
 syntax on
+
+"""""""""""""Colorscheme settings""""""""""""""
 colorscheme onedark
+
 """""""""numbering type"""""""""
 set relativenumber
+
+""""""""""Vim airline options"""""""""""""
 let g:airline_theme='deus'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -92,12 +99,6 @@ set autoread
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
-
-" Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
 
 " Turn on the Wild menu
 set wildmenu
