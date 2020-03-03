@@ -187,7 +187,7 @@ set autoread
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
-" Turn on the Wild menu
+" Turn on the Wild menu for autocompletion/suggestion in command
 set wildmenu
 
 " Ignore compiled files
