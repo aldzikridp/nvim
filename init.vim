@@ -6,17 +6,9 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lambdalisue/suda.vim'
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'lervag/vimtex'
-"Plug 'Shougo/neosnippet.vim'
-"Plug 'Shougo/neosnippet-snippets'
-"Plug 'honza/vim-snippets'
-"Plug 'autozimu/LanguageClient-neovim', {
-"    \ 'branch': 'next',
-"    \ 'do': 'bash install.sh',
-"    \ }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 """"""""""" Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -155,41 +147,6 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-"""""""""""""" option for LanguageClient-neovim
-"set hidden
-"let g:LanguageClient_serverCommands = {
-"    \ 'java': ['~/.config/nvim/jdtls', '-data', getcwd()],
-"    \}
-
-"nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-"" Or map each action separately
-"nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-"nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-"nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-""""""""""""option for neosnippet"""""""""""
-"let g:neosnippet#enable_complete_done = 1
-"" Plugin key-mappings.
-"" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" Enable snipMate compatibility feature.
-"let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-"let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
-
 """"""""""""option for vimtex""""""""""
 let g:vimtex_compiler_progname = 'nvr'
 let g:polyglot_disabled = ['latex']
@@ -199,14 +156,6 @@ set cursorline
 
 """"""""""""enable mouse"""""""""""""""
 set mouse=a
-""""""""""""option for deoplete"""""""""
-"let g:deoplete#enable_at_startup = 1
-"call deoplete#custom#var('omni', 'input_patterns', {
-"      \ 'tex': g:vimtex#re#deoplete
-"      \})
-"call deoplete#custom#source('LanguageClient',
-"            \ 'min_pattern_length',
-"            \ 2)
 
 """"""""""""Enable syntax highlighting"""""""""
 syntax on
