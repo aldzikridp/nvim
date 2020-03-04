@@ -8,7 +8,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'lambdalisue/suda.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'lervag/vimtex'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 """"""""""" Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -146,10 +145,6 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-""""""""""""option for vimtex""""""""""
-let g:vimtex_compiler_progname = 'nvr'
-let g:polyglot_disabled = ['latex']
 
 """""""""""""highlight current line"""""""""
 set cursorline

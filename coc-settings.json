@@ -1,0 +1,4 @@
+{
+    "latex.build.onSave":true,
+    "latex.lint.onChange":true
+}
