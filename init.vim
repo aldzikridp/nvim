@@ -175,6 +175,9 @@ let g:airline_theme='deus'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
+" Dont show mode, since I use powerline (vim-airline) anyway
+set noshowmode
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
