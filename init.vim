@@ -15,7 +15,13 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 """""""""""""""""option for coc.nvim"""""""""""""
 " Install this extension
-let g:coc_global_extensions = ['coc-json', 'coc-java', 'coc-texlab', 'coc-html', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-json',
+    \ 'coc-java', 
+    \ 'coc-texlab',
+    \ 'coc-html',
+    \ 'coc-tsserver',
+    \ 'coc-phpls',
+    \ 'coc-css']
 
 " TextEdit might fail if hidden is not set.
 set hidden
