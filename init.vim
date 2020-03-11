@@ -158,6 +158,9 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 """""""""""""highlight current line"""""""""
 set cursorline
 
+"""""""""""""set textwidht, how long line should be, when wrapped lines breaks into several lines
+set textwidht=120
+
 """"""""""""enable mouse"""""""""""""""
 set mouse=a
 
