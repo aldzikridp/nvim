@@ -158,9 +158,6 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 """""""""""""highlight current line"""""""""
 set cursorline
 
-"""""""""""""set textwidht, how long line should be, when wrapped lines breaks into several lines
-set textwidth=120
-
 """"""""""""enable mouse"""""""""""""""
 set mouse=a
 
@@ -278,7 +275,7 @@ set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
-set tw=500
+set textwidth=120
 
 set ai "Auto indent
 set si "Smart indent
