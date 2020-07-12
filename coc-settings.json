@@ -1,4 +1,5 @@
 {
     "latex.build.onSave":false,
-    "latex.lint.onChange":true
+    "latex.lint.onChange":true,
+    "python.jediEnabled": false
 }

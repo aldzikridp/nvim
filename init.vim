@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'lambdalisue/suda.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -16,11 +15,12 @@ call plug#end()
 """""""""""""""""option for coc.nvim"""""""""""""
 " Install this extension
 let g:coc_global_extensions = ['coc-json',
-    \ 'coc-java', 
+    \ 'coc-java',
     \ 'coc-texlab',
     \ 'coc-html',
     \ 'coc-tsserver',
     \ 'coc-phpls',
+    \ 'coc-python',
     \ 'coc-css']
 
 " TextEdit might fail if hidden is not set.
