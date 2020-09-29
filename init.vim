@@ -1,159 +1,237 @@
+"""""""""""Install vim-plug if it's not installed""""""""""
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 """""""""""""Put plugin below"""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
+"""""""""""Git integration
+Plug 'jreybert/vimagit'
+Plug 'tpope/vim-fugitive'
+
 """""""""" On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+""""""""""""""Status Line""""""""""""""
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+""""""""""""""" Colorscheme""""""""""""
 Plug 'joshdick/onedark.vim'
+"Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'tomasiser/vim-code-dark'
+"
+""""Language Pack
 Plug 'sheerun/vim-polyglot'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 """"""""""" Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+"""""""""""deoplete for LSP completion""""""""""""""
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+""""""""""Snippets support for LanguageClient-neovim
+Plug 'SirVer/ultisnips'
+
+"""""""""""LSP Client""""""""""""
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+"""""""""""" Always put vim-devicons as last loaded plugin
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
-"""""""""""""""""option for coc.nvim"""""""""""""
-" Install this extension
-let g:coc_global_extensions = ['coc-json',
-    \ 'coc-java',
-    \ 'coc-texlab',
-    \ 'coc-html',
-    \ 'coc-tsserver',
-    \ 'coc-phpls',
-    \ 'coc-python',
-    \ 'coc-css']
+""""""""""""Enable syntax highlighting"""""""""
+"Always set at first before other
+"color/highlight set, so the settings
+"will not overwritten
+syntax on
 
-" TextEdit might fail if hidden is not set.
-set hidden
+"""""""""""""Colorscheme settings""""""""""""""
+colorscheme onedark
+set termguicolors
 
-" Some servers have issues with backup files, see #649.
-set nowritebackup
+""""""""""""Enable deoplete"""""""""
+let g:deoplete#enable_at_startup = 1
+"NERDTree keybinding
+nnoremap <leader><S-n> :NERDTreeToggle<CR>
 
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
+"""""""""""FZF settings""""""""""""
+""Keybinding
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fm :Marks<CR>
+nnoremap <leader>fl :Lines<CR>
+nnoremap <leader>f<S-l> :BLines<CR>
 
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
+""""""""""""NERDTree conf
+""Change root to current directory
+let g:NERDTreeChDirMode = 3
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
+"""""""""""""""""option for LanguageClient-neovim"""""""""""""
+function SetLSPShortcuts()
+  nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+  nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+  nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+  nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
+  nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+  nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+  nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+  nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+endfunction()
+
+augroup LSP
+  autocmd!
+  "set key binding on filetype
+  autocmd FileType java call SetLSPShortcuts()
+augroup END
+
+" Always show column for LSP sign
 set signcolumn=yes
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    "\ 'java': ['~/.config/nvim/jdtls', '-data', getcwd()],
+let g:LanguageClient_serverCommands = {
+    \ 'java': ['~/.config/nvim/jdtls'],
+    \ 'tex': ['~/Latex/texlab'],
+    \ }
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" LSP Syntax highlighting
+let g:LanguageClient_semanticHighlightMaps = {}
+let g:LanguageClient_semanticHighlightMaps['java'] = {
+    \ '^storage.modifier.static.java:entity.name.function.java': 'JavaStaticMemberFunction',
+    \ '^meta.definition.variable.java:meta.class.body.java:meta.class.java': 'JavaMemberVariable',
+    \ '^storage.modifier.static.java:storage.modifier.final.java:variable.other.definition.java:meta.definition.variable.java': 'EnumConstant',
+    \ '^entity.name.function.java': 'Function',
+    \ 'entity.name.function.java': 'Function',
+    \ 'entity.name.type.class.java': 'Type',
+    \ 'entity.name.type.enum.java': 'Type',
+    \ 'entity.name.type.interface.java': 'Type',
+    \ '^storage.type.generic.java': 'Type',
+    \ }
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+highlight! JavaMemberVariable  guifg=#E06C75
+highlight! link JavaStaticMemberFunction Constant
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-if has('patch8.1.1068')
-  " Use `complete_info` if your (Neo)Vim version supports it.
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+" Disable message in right side
+" of code when there's error/warning
+let g:LanguageClient_useVirtualText='No'
 
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" Sign text config
+let g:LanguageClient_diagnosticsDisplay = {
+    \     1: {
+    \         "name": "Error",
+    \         "texthl": "Underlined",
+    \         "signText": "✖",
+    \         "signTexthl": "ErrorMsg",
+    \     },
+    \     2: {
+    \         "name": "Warning",
+    \         "texthl": "Underlined",
+    \         "signText": "⚠",
+    \         "signTexthl": "WarningMsg",
+    \     },
+    \     3: {
+    \         "name": "Information",
+    \         "texthl": "Underlined",
+    \         "signText": "ℹ",
+    \         "signTexthl": "Question",
+    \     },
+    \     4: {
+    \         "name": "Hint",
+    \         "texthl": "Underlined",
+    \         "signText": "➤",
+    \         "signTexthl": "Normal",
+    \     },
+    \ }
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+""""""""""End of configuration for LanguageClient-neovim""""""""""""""
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
+"""""""""""Ultisnips conf""""""""""""""""""""
+" for better integration with LSP
+let g:ulti_expand_res = 0 "default value, just set once
+function! CompleteSnippet()
+  if empty(v:completed_item)
+    return
   endif
+
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res > 0
+    return
+  endif
+
+  let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
+  let l:comp_len = len(l:complete)
+
+  let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
+  let l:cur_line = getline('.')
+
+  let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
+  let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
+
+  call setline('.', l:start . l:end)
+  call cursor('.', l:cur_col - l:comp_len + 2)
+
+  call UltiSnips#Anon(l:complete)
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CompleteDone * call CompleteSnippet()
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+" Trigger configuration. You need to change this to something else than <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+""""""""""Vim airline options"""""""""""""
+let g:airline_theme='onedark'
+"""" enable airline in tab line
+let g:airline#extensions#tabline#enabled = 1
+""" Path formatter
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+"""" enable airline in buffer line
+let g:airline#extensions#bufferline#enabled = 1
+""" Use powerline fonts
+let g:airline_powerline_fonts = 1
+"""Separator (NerdFont)
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_left_alt_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
 
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+"""LanguageClient status icon
+let airline#extensions#languageclient#error_symbol = '✖ '
+let airline#extensions#languageclient#warning_symbol = '⚠ '
+let airline#extensions#languageclient#open_lnum_symbol = ' :'
+let airline#extensions#languageclient#close_lnum_symbol = ' '
 
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+"""Status Icon
+let g:airline_symbols = {
+          \ 'readonly': "\ue0a2",
+          \ 'whitespace': "\u2632",
+          \ 'linenr': "\u2630 ",
+          \ 'maxlinenr': " ",
+          \ 'branch': "\ue0a0",
+          \ 'notexists': "\u0246",
+          \ 'dirty': "\u26a1",
+          \ 'crypt': nr2char(0x1F512),
+          \ }
 
-" Introduce function text object
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
+" Always show the status line (vim-airline is statusline)
+set laststatus=2
 
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Mappings using CoCList:
-" Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" Dont show mode, since I use vim-airline anyway
+set noshowmode
 
 """""""""""""highlight current line"""""""""
 set cursorline
@@ -161,22 +239,8 @@ set cursorline
 """"""""""""enable mouse"""""""""""""""
 set mouse=a
 
-""""""""""""Enable syntax highlighting"""""""""
-syntax on
-
-"""""""""""""Colorscheme settings""""""""""""""
-colorscheme onedark
-
 """""""""numbering type"""""""""
 set relativenumber
-
-""""""""""Vim airline options"""""""""""""
-let g:airline_theme='deus'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-" Dont show mode, since I use powerline (vim-airline) anyway
-set noshowmode
 
 " Sets how many lines of history VIM has to remember
 set history=500
@@ -191,19 +255,14 @@ set autoread
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+" Set 5 lines to the cursor - when moving vertically using j/k
+set so=5
 
 " Turn on the Wild menu for autocompletion/suggestion in command
 set wildmenu
 
 " Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
-else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
+set wildignore+=*.o,*~,*.pyc,*.class,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/bin/*
 
 "Always show current position
 set ruler
@@ -212,7 +271,7 @@ set ruler
 set cmdheight=2
 
 " A buffer becomes hidden when it is abandoned
-set hid
+set hidden
 
 " Ignore case when searching
 set ignorecase
@@ -244,10 +303,10 @@ set t_vb=
 set tm=500
 
 " Add a bit extra margin to the left
-set foldcolumn=1
+"set foldcolumn=1
 
 " Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+set encoding=UTF-8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -273,7 +332,7 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-" Linebreak on 500 characters
+" Linebreak on 120 characters
 set lbr
 set textwidth=120
 
@@ -287,8 +346,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """"""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
@@ -302,4 +359,3 @@ endfun
 if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
-
