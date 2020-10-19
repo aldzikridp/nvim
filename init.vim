@@ -60,9 +60,30 @@ let g:deoplete#enable_at_startup = 1
 nnoremap <leader><S-n> :NERDTreeToggle<CR>
 
 """""""""""FZF settings""""""""""""
+let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
+
+""Delete Buffers with fzf
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+  \ }))
+
 ""Keybinding
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fd :BD<CR>
 nnoremap <leader>fm :Marks<CR>
 nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>f<S-l> :BLines<CR>
