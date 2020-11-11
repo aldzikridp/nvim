@@ -91,6 +91,13 @@ nnoremap <leader>f<S-l> :BLines<CR>
 """"""""""""NERDTree conf
 ""Change root to current directory
 let g:NERDTreeChDirMode = 3
+""Close vim, if remaining buffer is nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+""Prevent opening file in nerdtree buffer
+autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+""Prevent crash wen calling Plug
+""When cursor is on nerdtree window
+let g:plug_window = 'noautocmd vertical topleft new'
 
 """""""""""""""""option for LanguageClient-neovim"""""""""""""
 function SetLSPShortcuts()
