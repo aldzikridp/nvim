@@ -122,7 +122,6 @@ augroup END
 " Always show column for LSP sign
 set signcolumn=yes
 
-    "\ 'java': ['~/.config/nvim/jdtls', '-data', getcwd()],
 let g:LanguageClient_serverCommands = {
     \ 'java': ['~/.config/nvim/jdtls'],
     \ 'tex': ['~/Latex/texlab'],
