@@ -51,8 +51,16 @@ call plug#end()
 syntax on
 
 """""""""""""Colorscheme settings""""""""""""""
+""Onedark settings
+""Always put before 'colorscheme onedark' option
+" enable italic
+let g:onedark_terminal_italics=1
+" hide '~' in empty line
+let g:onedark_hide_endofbuffer=1
+
 colorscheme onedark
 set termguicolors
+
 
 """"""""""""Enable deoplete"""""""""
 let g:deoplete#enable_at_startup = 1
