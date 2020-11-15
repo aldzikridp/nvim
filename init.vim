@@ -124,7 +124,7 @@ endfunction()
 augroup LSP
   autocmd!
   "set key binding on filetype
-  autocmd FileType java call SetLSPShortcuts()
+  autocmd FileType java,js,ts call SetLSPShortcuts()
 augroup END
 
 " Always show column for LSP sign
