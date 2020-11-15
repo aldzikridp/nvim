@@ -8,8 +8,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 """""""""""Git integration
+Plug 'lambdalisue/gina.vim'
 Plug 'jreybert/vimagit'
-Plug 'tpope/vim-fugitive'
 
 """""""""" On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
