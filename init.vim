@@ -133,6 +133,8 @@ set signcolumn=yes
 let g:LanguageClient_serverCommands = {
     \ 'java': ['~/.config/nvim/jdtls'],
     \ 'tex': ['~/Latex/texlab'],
+    \ 'javascript': ['~/.npm-packages/bin/typescript-language-server','--stdio'],
+    \ 'typescript': ['~/.npm-packages/bin/typescript-language-server','--stdio'],
     \ }
 
 " LSP Syntax highlighting
@@ -378,11 +380,7 @@ set wrap "Wrap lines
 " Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""
-
-" Delete trailing white space on save, useful for some filetypes ;)
+" Delete trailing white space on save
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
