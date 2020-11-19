@@ -61,7 +61,6 @@ let g:onedark_hide_endofbuffer=1
 colorscheme onedark
 set termguicolors
 
-
 """"""""""""Enable deoplete"""""""""
 let g:deoplete#enable_at_startup = 1
 "NERDTree keybinding
@@ -153,6 +152,10 @@ let g:LanguageClient_semanticHighlightMaps['java'] = {
 
 highlight! JavaMemberVariable  guifg=#E06C75
 highlight! link JavaStaticMemberFunction Constant
+highlight! Errorline gui=underline guisp=Red
+highlight! Warningline gui=underline guisp=Yellow
+highlight! Infoline gui=underline guisp=Green
+highlight! Hintline gui=underline guisp=White
 
 " Disable message in right side
 " of code when there's error/warning
@@ -162,26 +165,26 @@ let g:LanguageClient_useVirtualText='No'
 let g:LanguageClient_diagnosticsDisplay = {
     \     1: {
     \         "name": "Error",
-    \         "texthl": "Underlined",
-    \         "signText": "✖",
+    \         "texthl": "Errorline",
+    \         "signText": "✖ ",
     \         "signTexthl": "ErrorMsg",
     \     },
     \     2: {
     \         "name": "Warning",
-    \         "texthl": "Underlined",
-    \         "signText": "⚠",
+    \         "texthl": "Warningline",
+    \         "signText": "⚠ ",
     \         "signTexthl": "WarningMsg",
     \     },
     \     3: {
     \         "name": "Information",
-    \         "texthl": "Underlined",
-    \         "signText": "ℹ",
+    \         "texthl": "Infoline",
+    \         "signText": "ℹ ",
     \         "signTexthl": "Question",
     \     },
     \     4: {
     \         "name": "Hint",
-    \         "texthl": "Underlined",
-    \         "signText": "➤",
+    \         "texthl": "Hintline",
+    \         "signText": "➤ ",
     \         "signTexthl": "Normal",
     \     },
     \ }
