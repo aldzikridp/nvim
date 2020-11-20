@@ -262,8 +262,8 @@ let g:airline_symbols = {
           \ 'linenr': "\u2630 ",
           \ 'maxlinenr': " ",
           \ 'branch': "\ue0a0",
-          \ 'notexists': "\u0246",
-          \ 'dirty': "\u26a1",
+          \ 'notexists': " ",
+          \ 'dirty': " ﰸ",
           \ 'crypt': nr2char(0x1F512),
           \ }
 
