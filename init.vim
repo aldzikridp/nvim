@@ -271,6 +271,9 @@ let g:airline_symbols = {
 " Always show the status line (vim-airline is statusline)
 set laststatus=2
 
+" Realtime and interactive subtitute (:s/foo/bar)
+set inccommand=split
+
 " Dont show mode, since I use vim-airline anyway
 set noshowmode
 
