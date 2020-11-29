@@ -123,7 +123,7 @@ endfunction()
 augroup LSP
   autocmd!
   "set key binding on filetype
-  autocmd FileType java,js,ts call SetLSPShortcuts()
+  autocmd FileType java,js,ts,php call SetLSPShortcuts()
 augroup END
 
 " Always show column for LSP sign
@@ -134,6 +134,7 @@ let g:LanguageClient_serverCommands = {
     \ 'tex': ['~/Latex/texlab'],
     \ 'javascript': ['~/.npm-packages/bin/typescript-language-server','--stdio'],
     \ 'typescript': ['~/.npm-packages/bin/typescript-language-server','--stdio'],
+    \ 'php': ['~/.npm-packages/bin/intelephense','--stdio'],
     \ }
 
 " LSP Syntax highlighting
