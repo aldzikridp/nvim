@@ -107,6 +107,8 @@ autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | en
 let g:plug_window = 'noautocmd vertical topleft new'
 
 """""""""""""""""option for LanguageClient-neovim"""""""""""""
+let g:LanguageClient_hasSnippetSupport=1
+let g:LanguageClient_completionPreferTextEdit=1
 function SetLSPShortcuts()
   nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
   nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
@@ -250,10 +252,12 @@ endfunction
 
 autocmd CompleteDone * call CompleteSnippet()
 
-" Trigger configuration. You need to change this to something else than <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+imap <silent><expr> <tab> pumvisible() ? "\<c-y>" : "\<tab>"
+
+let g:UltiSnipsExpandTrigger="<NUL>"
+let g:UltiSnipsListSnippets="<NUL>"
+let g:UltiSnipsJumpForwardTrigger="<C-n>"
+let g:UltiSnipsJumpBackwardTrigger="<C-p>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
