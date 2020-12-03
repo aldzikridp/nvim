@@ -123,7 +123,7 @@ endfunction()
 augroup LSP
   autocmd!
   "set key binding on filetype
-  autocmd FileType java,js,ts,php call SetLSPShortcuts()
+  autocmd FileType java,js,ts,php,c,cpp call SetLSPShortcuts()
 augroup END
 
 " Always show column for LSP sign
@@ -134,6 +134,8 @@ let g:LanguageClient_serverCommands = {
     \ 'tex': ['~/Latex/texlab'],
     \ 'javascript': ['~/.npm-packages/bin/typescript-language-server','--stdio'],
     \ 'typescript': ['~/.npm-packages/bin/typescript-language-server','--stdio'],
+    \ 'c': ['clangd', '-background-index',],
+    \ 'cpp': ['clangd', '-background-index',],
     \ 'php': ['~/.npm-packages/bin/intelephense','--stdio'],
     \ }
 
@@ -149,6 +151,32 @@ let g:LanguageClient_semanticHighlightMaps['java'] = {
     \ 'entity.name.type.enum.java': 'Type',
     \ 'entity.name.type.interface.java': 'Type',
     \ '^storage.type.generic.java': 'Type',
+    \ }
+let g:LanguageClient_semanticHighlightMaps['cpp'] = {
+    \ '^entity.name.function.cpp': 'Function',
+    \ '^entity.name.function.method.cpp': 'Function',
+    \ '^entity.name.function.preprocessor.cpp': 'PreProc',
+    \ '^entity.name.namespace.cpp': 'Type',
+    \ '^entity.name.type.class.cpp': 'Type',
+    \ '^entity.name.type.enum.cpp': 'Type',
+    \ '^entity.name.type.template.cpp': 'Type',
+    \ '^meta.disabled': 'Comment',
+    \ '^variable.other.cpp': 'Variable',
+    \ '^variable.other.enummember.cpp': 'Constant',
+    \ '^variable.other.field.cpp': 'Variable',
+    \ }
+let g:LanguageClient_semanticHighlightMaps['c'] = {
+    \ '^entity.name.function.cpp': 'Function',
+    \ '^entity.name.function.method.cpp': 'Function',
+    \ '^entity.name.function.preprocessor.cpp': 'PreProc',
+    \ '^entity.name.namespace.cpp': 'Type',
+    \ '^entity.name.type.class.cpp': 'Type',
+    \ '^entity.name.type.enum.cpp': 'Type',
+    \ '^entity.name.type.template.cpp': 'Type',
+    \ '^meta.disabled': 'Comment',
+    \ '^variable.other.cpp': 'Variable',
+    \ '^variable.other.enummember.cpp': 'Constant',
+    \ '^variable.other.field.cpp': 'Variable',
     \ }
 
 highlight! JavaMemberVariable  guifg=#E06C75
