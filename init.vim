@@ -63,6 +63,13 @@ set termguicolors
 
 """"""""""""Enable deoplete"""""""""
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+    \ 'auto_complete_delay': 0,
+    \ 'deoplete-filter-matcher_full_fuzzy': v:true,
+    \ 'camel_case': v:true,
+    \ 'smart_case': v:true,
+    \ 'min_pattern_length': 1,
+    \ })
 "NERDTree keybinding
 nnoremap <leader><S-n> :NERDTreeToggle<CR>
 
@@ -146,7 +153,7 @@ let g:LanguageClient_semanticHighlightMaps = {}
 let g:LanguageClient_semanticHighlightMaps['java'] = {
     \ '^storage.modifier.static.java:entity.name.function.java': 'JavaStaticMemberFunction',
     \ '^meta.definition.variable.java:meta.class.body.java:meta.class.java': 'JavaMemberVariable',
-    \ '^storage.modifier.static.java:storage.modifier.final.java:variable.other.definition.java:meta.definition.variable.java': 'EnumConstant',
+    \ '^storage.modifier.static.java:storage.modifier.final.java:variable.other.definition.java:meta.definition.variable.java': 'Constant',
     \ '^entity.name.function.java': 'Function',
     \ 'entity.name.function.java': 'Function',
     \ 'entity.name.type.class.java': 'Type',
