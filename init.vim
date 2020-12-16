@@ -206,24 +206,28 @@ let g:LanguageClient_diagnosticsDisplay = {
     \         "texthl": "Errorline",
     \         "signText": "✖ ",
     \         "signTexthl": "ErrorMsg",
+    \         "virtualTexthl": "Error",
     \     },
     \     2: {
     \         "name": "Warning",
     \         "texthl": "Warningline",
     \         "signText": "⚠ ",
     \         "signTexthl": "WarningMsg",
+    \         "virtualTexthl": "Todo",
     \     },
     \     3: {
     \         "name": "Information",
     \         "texthl": "Infoline",
     \         "signText": "ℹ ",
     \         "signTexthl": "Question",
+    \         "virtualTexthl": "Todo",
     \     },
     \     4: {
     \         "name": "Hint",
     \         "texthl": "Hintline",
     \         "signText": "➤ ",
     \         "signTexthl": "Normal",
+    \         "virtualTexthl": "Todo",
     \     },
     \ }
 
