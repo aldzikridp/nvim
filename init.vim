@@ -267,8 +267,8 @@ imap <silent><expr> <tab> pumvisible() ? "\<c-y>" : "\<tab>"
 
 let g:UltiSnipsExpandTrigger="<NUL>"
 let g:UltiSnipsListSnippets="<NUL>"
-let g:UltiSnipsJumpForwardTrigger="<C-n>"
-let g:UltiSnipsJumpBackwardTrigger="<C-p>"
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
