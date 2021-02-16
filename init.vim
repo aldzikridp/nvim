@@ -7,6 +7,12 @@ endif
 """""""""""""Put plugin below"""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
+""""""""""" Fade inactive buff
+Plug 'TaDaa/vimade'
+
+"""""""""" Register Made Easy
+"Plug 'gennaro-tedesco/nvim-peekup'
+
 """""""""""Git integration
 Plug 'lambdalisue/gina.vim'
 Plug 'jreybert/vimagit'
@@ -44,6 +50,9 @@ Plug 'autozimu/LanguageClient-neovim', {
 """""""""""" Always put vim-devicons as last loaded plugin
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
+
+""" nvim peekup
+"let g:peekup_open = '""'
 """"""""""""Enable syntax highlighting"""""""""
 "Always set at first before other
 "color/highlight set, so the settings
@@ -319,6 +328,11 @@ set inccommand=split
 
 " Dont show mode, since I use vim-airline anyway
 set noshowmode
+
+""""""""""""Vimade"""""""""""""""
+let g:vimade = {} "always put this before vimade opt
+let g:vimade.fadelevel = 0.75
+let g:vimade.enablesigns = 1
 
 """""""""""""highlight current line"""""""""
 set cursorline
