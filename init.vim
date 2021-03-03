@@ -1,9 +1,3 @@
-"""""""""""Install vim-plug if it's not installed""""""""""
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 """""""""""""Put plugin below"""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
@@ -17,8 +11,8 @@ Plug 'TaDaa/vimade'
 Plug 'lambdalisue/gina.vim'
 Plug 'jreybert/vimagit'
 
-"""""""""" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"""""""""" File-tree
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 """"""""""""""Status Line""""""""""""""
 Plug 'vim-airline/vim-airline'
@@ -79,8 +73,18 @@ call deoplete#custom#option({
     \ 'smart_case': v:true,
     \ 'min_pattern_length': 1,
     \ })
-"NERDTree keybinding
-nnoremap <leader><S-n> :NERDTreeToggle<CR>
+"""""""""""CHADTree settings"""""""""
+let g:chadtree_settings = {
+      \ "view": {
+      \ "width": 30,
+      \ "window_options": {
+      \   "relativenumber" : v:true,
+      \  }
+      \ }
+      \}
+"
+"CHADTree keybinding
+nnoremap <leader>f <cmd>CHADopen<cr>
 
 """""""""""FZF settings""""""""""""
 let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
@@ -110,17 +114,6 @@ nnoremap <leader>fd :BD<CR>
 nnoremap <leader>fm :Marks<CR>
 nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>f<S-l> :BLines<CR>
-
-""""""""""""NERDTree conf
-""Change root to current directory
-let g:NERDTreeChDirMode = 3
-""Close vim, if remaining buffer is nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-""Prevent opening file in nerdtree buffer
-autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
-""Prevent crash wen calling Plug
-""When cursor is on nerdtree window
-let g:plug_window = 'noautocmd vertical topleft new'
 
 """""""""""""""""option for LanguageClient-neovim"""""""""""""
 let g:LanguageClient_hasSnippetSupport=1
