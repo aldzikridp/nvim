@@ -21,7 +21,7 @@ paq 'nvim-telescope/telescope-fzy-native.nvim'
 
 -- LSP
 paq {'neovim/nvim-lspconfig', opt=true}
-paq 'glepnir/lspsaga.nvim'
+paq {'glepnir/lspsaga.nvim', opt=true}
 paq 'hrsh7th/nvim-compe'
 -- Java LSP
 paq {'mfussenegger/nvim-jdtls', opt=true}

@@ -3,17 +3,11 @@ vim.api.nvim_exec(
 if has('nvim-0.5')
   augroup lsp
     au!
-    au FileType java packadd nvim-jdtls | lua require('jdtls').start_or_attach({cmd = {'jdtls'}})
+    au FileType java packadd nvim-jdtls | packadd lspsaga.nvim | lua require('jdtls').start_or_attach({cmd = {'jdtls'}})
   augroup end
 endif
 ]],
 false)
-require 'lspsaga'.init_lsp_saga {
-    error_sign = '✖',
-    warn_sign = '⚠',
-    hint_sign = 'ℹ',
-    infor_sign = '➤',
-}
 --bomat, dah malem
 vim.api.nvim_exec(
 [[
