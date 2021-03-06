@@ -1,8 +1,13 @@
-require 'base'
-require 'plugins'
-require 'luatree'
-require 'treesitter'
+require 'mybase'
+require 'myplugins'
+require 'myluatree'
+require 'mytreesitter'
+require 'mytelescope'
+require 'mylsp'
+require 'mycompe'
+require 'mylualine'
+require 'mybufferline'
 
 --colorscheme
-require('zephyr')
-
+--require('highlite')
+vim.api.nvim_command('colorscheme onedark')
