@@ -1,14 +1,14 @@
-vim.cmd 'packadd paq-nvim'       -- Only needed once
+--vim.cmd 'packadd paq-nvim'       -- Only needed once
 package.loaded['paq-nvim'] = nil -- refresh package list
 local paq = require('paq-nvim').paq
 
-paq{'savq/paq-nvim', opt=true}
+paq 'savq/paq-nvim'
 
 -- Peek inside register
-paq 'gennaro-tedesco/nvim-peekup'
+--paq 'gennaro-tedesco/nvim-peekup'
 
 -- Fade inactive buff
-paq 'TaDaa/vimade'
+--paq 'TaDaa/vimade'
 
 -- Tree Shitter, lol
 paq 'nvim-treesitter/nvim-treesitter'
@@ -41,11 +41,10 @@ paq 'hoob3rt/lualine.nvim'
 paq 'akinsho/nvim-bufferline.lua'
 
 -- Colorscheme
-paq 'ChristianChiarulli/nvcode-color-schemes.vim'
+--paq 'ChristianChiarulli/nvcode-color-schemes.vim'
 --paq 'Iron-E/nvim-highlite'
 --paq 'glepnir/zephyr-nvim'
---paq 'tjdevries/colorbuddy.vim'
---paq 'Th3Whit3Wolf/onebuddy'
+paq 'Th3Whit3Wolf/one-nvim'
 
 -- Easier Kybindings
 paq 'tjdevries/astronauta.nvim'

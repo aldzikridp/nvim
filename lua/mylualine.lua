@@ -1,9 +1,9 @@
-local lualine = require('lualine')
-lualine.options = {
+require('lualine').setup{
+options = {
           theme = 'onedark',
           icons_enabled = true,
-}
-lualine.sections = {
+},
+sections = {
     lualine_a = { {'mode', upper = true} },
               lualine_b = { {'branch', icon = ''}},
               lualine_c = { {'filename', file_status = true} ,{'diagnostics', sources = { 'nvim_lsp'}}},
@@ -12,7 +12,7 @@ lualine.sections = {
               lualine_z = { 'location'  },
 
       }
+}
 --lualine.options.'diagnostics' = {
 --    sources = 'nvim_lsp',
 --}
-lualine.status()
