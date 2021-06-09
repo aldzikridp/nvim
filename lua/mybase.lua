@@ -12,6 +12,7 @@ vim.o.expandtab = true
 vim.o.hidden = true
 vim.o.history = 500
 vim.o.hlsearch = true
+vim.o.relativenumber = true
 vim.o.ignorecase = true
 vim.o.inccommand = "split"
 vim.o.incsearch = true

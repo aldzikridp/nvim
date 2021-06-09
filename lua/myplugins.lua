@@ -1,50 +1,55 @@
 --vim.cmd 'packadd paq-nvim'       -- Only needed once
 package.loaded['paq-nvim'] = nil -- refresh package list
 local paq = require('paq-nvim').paq
+require 'paq-nvim' {
 
-paq 'savq/paq-nvim'
+    'savq/paq-nvim';
 
--- Peek inside register
---paq 'gennaro-tedesco/nvim-peekup'
+    -- Peek inside register;
+    --'gennaro-tedesco/nvim-peekup';
 
--- Fade inactive buff
---paq 'TaDaa/vimade'
+    -- Fade inactive buff;
+    --'TaDaa/vimade';
 
--- Tree Shitter, lol
-paq 'nvim-treesitter/nvim-treesitter'
+    -- Tree Shitter, lol;
+    'nvim-treesitter/nvim-treesitter';
 
--- Telescope
-paq 'nvim-lua/plenary.nvim'
-paq 'nvim-lua/popup.nvim'
-paq 'nvim-telescope/telescope.nvim'
-paq 'nvim-telescope/telescope-fzy-native.nvim'
+    -- Telescope;
+    'nvim-lua/plenary.nvim';
+    'nvim-lua/popup.nvim';
+    'nvim-telescope/telescope.nvim';
+    'nvim-telescope/telescope-fzy-native.nvim';
 
--- LSP
-paq {'neovim/nvim-lspconfig', opt=true}
-paq {'glepnir/lspsaga.nvim', opt=true}
-paq 'hrsh7th/nvim-compe'
--- Java LSP
-paq {'mfussenegger/nvim-jdtls', opt=true}
+    -- LSP;
+    {'neovim/nvim-lspconfig', opt=true};
+    {'glepnir/lspsaga.nvim', opt=true};
+    'hrsh7th/nvim-compe';
+    -- Java LSP;
+    {'mfussenegger/nvim-jdtls', opt=true};
 
--- Icon
-paq 'kyazdani42/nvim-web-devicons'
+    -- Icon;
+    'kyazdani42/nvim-web-devicons';
 
--- File manager
-paq 'kyazdani42/nvim-tree.lua'
+    -- File manager;
+    'kyazdani42/nvim-tree.lua';
 
--- Easier color picking
-paq{'norcalli/nvim-colorizer.lua', opt=true}
+    -- Easier color picking;
+    {'norcalli/nvim-colorizer.lua', opt=true};
 
--- Statusline
---paq {'hoob3rt/lualine.nvim', opt=true}
-paq 'hoob3rt/lualine.nvim'
-paq 'akinsho/nvim-bufferline.lua'
+    -- Statusline;
+    --{'hoob3rt/lualine.nvim', opt=true};
+    'hoob3rt/lualine.nvim';
+    'akinsho/nvim-bufferline.lua';
 
--- Colorscheme
---paq 'ChristianChiarulli/nvcode-color-schemes.vim'
---paq 'Iron-E/nvim-highlite'
---paq 'glepnir/zephyr-nvim'
-paq 'Th3Whit3Wolf/one-nvim'
+    -- Colorscheme;
+    --'ChristianChiarulli/nvcode-color-schemes.vim';
+    --'Iron-E/nvim-highlite';
+    --'glepnir/zephyr-nvim';
+    --{'Th3Whit3Wolf/one-nvim', opt=true};
+    'Th3Whit3Wolf/one-nvim';
+    'bluz71/vim-nightfly-guicolors';
+    --'navarasu/onedark.nvim';
 
--- Easier Kybindings
-paq 'tjdevries/astronauta.nvim'
+    -- Easier Kybindings;
+    'tjdevries/astronauta.nvim';
+}

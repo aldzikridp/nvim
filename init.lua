@@ -10,5 +10,9 @@ require 'mybufferline'
 
 --colorscheme
 --require('highlite')
-vim.api.nvim_command('colorscheme one-nvim')
+vim.api.nvim_exec(
+[[
+colorscheme nightfly
+]],
+false)
 --require('zephyr')
