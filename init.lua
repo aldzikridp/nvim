@@ -1,5 +1,5 @@
 require 'mybase'
-require 'myplugins'
+--require 'myplugins'
 require 'myluatree'
 require 'mytreesitter'
 require 'mytelescope'
@@ -12,7 +12,8 @@ require 'mybufferline'
 --require('highlite')
 vim.api.nvim_exec(
 [[
-colorscheme nightfly
+colorscheme tokyonight
 ]],
 false)
+vim.g.tokyonight_hide_inactive_statusline = true
 --require('zephyr')

@@ -7,9 +7,10 @@ require('telescope').setup {
     }
 }
 require('telescope').load_extension('fzy_native')
-local astro = require("astronauta.keymap")
-local nnoremap = astro.nnoremap
-nnoremap {"<Leader>ff","<CMD>lua require('telescope.builtin').find_files()<CR>"}
-nnoremap {"<Leader>fg","<CMD>lua require('telescope.builtin').live_grep()<CR>"}
-nnoremap {"<Leader>fb","<CMD>lua require('telescope.builtin').buffers()<CR>"}
-nnoremap {"<Leader>fh","<CMD>lua require('telescope.builtin').help_tags()<CR>"}
+vim.api.nvim_exec(
+[[
+nnoremap <silent><leader>ff <cmd>lua require('telescope.builtin').find_files()<CR>
+nnoremap <silent><leader>fg <cmd>lua require('telescope.builtin').live_grep()<CR>
+nnoremap <silent><leader>fb <cmd>lua require('telescope.builtin').buffers()<CR>
+nnoremap <silent><leader>fh <cmd>lua require('telescope.builtin').help_tags()<CR>
+]],false)

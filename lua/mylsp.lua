@@ -1,3 +1,13 @@
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
+
 function lspsagainit()
     require('lspsaga').init_lsp_saga{
         error_sign = '✖',
@@ -23,6 +33,18 @@ function lspsagainit()
     ]],
     false)
     require'nvim-treesitter.configs'.setup { hightlight = { enable = true }}
+end
+function lsprome()
+    require'lspconfig'.rome.setup{
+        capabilities = capabilities,
+    }
+    lspsagainit()
+end
+function lsptsserver()
+    require'lspconfig'.tsserver.setup{
+        capabilities = capabilities,
+    }
+    lspsagainit()
 end
 vim.api.nvim_exec(
 [[

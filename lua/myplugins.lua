@@ -46,8 +46,9 @@ require 'paq-nvim' {
     --'Iron-E/nvim-highlite';
     --'glepnir/zephyr-nvim';
     --{'Th3Whit3Wolf/one-nvim', opt=true};
-    'Th3Whit3Wolf/one-nvim';
-    'bluz71/vim-nightfly-guicolors';
+    --'Th3Whit3Wolf/one-nvim';
+    --'bluz71/vim-nightfly-guicolors';
+    'folke/tokyonight.nvim';
     --'navarasu/onedark.nvim';
 
     -- Easier Kybindings;

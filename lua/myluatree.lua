@@ -1,5 +1,5 @@
-local astro = require("astronauta.keymap")
+vim.api.nvim_exec(
+[[
+nnoremap <silent><leader>b <cmd>NvimTreeToggle<CR>
+]],false)
 
-local nnoremap = astro.nnoremap
-
-nnoremap {"<Leader>b","<CMD>NvimTreeToggle<CR>"}
