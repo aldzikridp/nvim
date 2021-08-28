@@ -40,6 +40,7 @@ vim.o.wb = false
 vim.o.wrap = true
 vim.wo.cursorline = true
 vim.wo.relativenumber = true
+vim.o.relativenumber = true
 vim.wo.signcolumn = "yes"
 vim.api.nvim_command('filetype plugin on')
 vim.api.nvim_exec(
