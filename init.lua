@@ -4,7 +4,7 @@ require 'myluatree'
 require 'mytreesitter'
 require 'mytelescope'
 require 'mylsp'
-require 'mycompe'
+require 'mycmp'
 require 'mylualine'
 require 'mybufferline'
 
