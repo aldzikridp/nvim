@@ -43,8 +43,3 @@ vim.wo.relativenumber = true
 vim.o.relativenumber = true
 vim.wo.signcolumn = "yes"
 vim.api.nvim_command('filetype plugin on')
-vim.api.nvim_exec(
-[[
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-]],
-false)

@@ -21,4 +21,8 @@ cmp.setup {
     { name = "nvim_lua" },
     { name = "path" },
   },
+
+  documentation = {
+      border = "single"
+    }
 }

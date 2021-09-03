@@ -7,13 +7,5 @@ require 'mylsp'
 require 'mycmp'
 require 'mylualine'
 require 'mybufferline'
-
---colorscheme
---require('highlite')
-vim.api.nvim_exec(
-[[
-colorscheme tokyonight
-]],
-false)
-vim.g.tokyonight_hide_inactive_statusline = true
---require('zephyr')
+require 'myshade'
+require 'mytokyonight'
