@@ -109,16 +109,15 @@ local on_attach = function(client, bufnr)
 end
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = "single"})]]
 
-function lsprome()
-    lsp.rome.setup{
-        capabilities = capabilities,
-        on_attach = on_attach
-    }
-end
-function lsptsserver()
-    lsp.tsserver.setup{
-        capabilities = capabilities,
-        on_attach = on_attach
-    }
-end
-lsptsserver()
+--lsp.rome.setup{
+--    capabilities = capabilities,
+--    on_attach = on_attach
+--}
+lsp.tsserver.setup{
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+lsp.ccls.setup{
+    capabilities = capabilities,
+    on_attach = on_attach
+}
