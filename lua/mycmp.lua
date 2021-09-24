@@ -10,10 +10,6 @@ cmp.setup {
     end,
   },
 
-  mapping = {
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  },
-
   sources = {
     { name = "nvim_lsp" },
     { name = "luasnip" },

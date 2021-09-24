@@ -1,11 +1,9 @@
---vim.o.softtabstop = 4
-vim.o.autoindent = true
+vim.o.softtabstop = 4
 vim.o.autoindent = true
 vim.o.autoread = true
 vim.o.backup = false
 vim.o.breakindent = true
 vim.o.cmdheight = 2
-vim.o.completeopt = "menuone,noselect" --required for nvim-compe
 vim.o.encoding = "UTF-8"
 vim.o.errorbells = false
 vim.o.expandtab = true
