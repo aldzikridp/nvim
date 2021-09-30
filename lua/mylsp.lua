@@ -106,6 +106,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>ft', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = "single"})<CR>', opts)
 end
+
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = "single"})]]
 
 --lsp.rome.setup{
@@ -119,4 +120,43 @@ lsp.tsserver.setup{
 lsp.ccls.setup{
     capabilities = capabilities,
     on_attach = on_attach
+}
+lsp.diagnosticls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = {"javascript", "typescript"},
+    init_options = {
+        linters = {
+            eslint = {
+                command = "./node_modules/.bin/eslint",
+                rootPatterns = {".git"},
+                debounce = 100,
+                args = {
+                    "--stdin",
+                    "--stdin-filename",
+                    "%filepath",
+                    "--format",
+                    "json"
+                },
+                sourceName = "eslint",
+                parseJson = {
+                    errorsRoot = "[0].messages",
+                    line = "line",
+                    column = "column",
+                    endLine = "endLine",
+                    endColumn = "endColumn",
+                    message = "[ESLint] ${message} [${ruleId}]",
+                    security = "severity"
+                },
+                securities = {
+                    [2] = "error",
+                    [1] = "warning"
+                }
+            },
+        },
+        filetypes = {
+            javascript = "eslint",
+            typescript = "eslint"
+        }
+    }
 }
