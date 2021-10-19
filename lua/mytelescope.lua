@@ -6,7 +6,7 @@ require('telescope').setup {
         }
     }
 }
-require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('fzf')
 vim.api.nvim_exec(
 [[
 nnoremap <silent><leader>ff <cmd>lua require('telescope.builtin').find_files()<CR>
