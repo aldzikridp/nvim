@@ -1,46 +1,46 @@
-vim.o.softtabstop = 4
-vim.o.autoindent = true
-vim.o.autoread = true
-vim.o.backup = false
-vim.o.breakindent = true
-vim.o.cmdheight = 2
-vim.o.encoding = "UTF-8"
-vim.o.errorbells = false
-vim.o.expandtab = true
-vim.o.fileformat = "unix"
-vim.o.fileformats = "unix,dos"
-vim.o.hidden = true
-vim.o.history = 500
-vim.o.hlsearch = true
-vim.o.relativenumber = true
-vim.o.number = true
-vim.o.ignorecase = true
-vim.o.inccommand = "split"
-vim.o.incsearch = true
-vim.o.laststatus = 2
-vim.o.lazyredraw = true
-vim.o.linebreak = true
-vim.o.magic = true
-vim.o.matchtime = 2
-vim.o.mouse = 'a'
-vim.o.ruler = true
-vim.o.scrolloff = 5
-vim.o.shiftwidth = 4
-vim.o.showmatch = true
-vim.o.showmode = false
-vim.o.smartcase = true
-vim.o.smartindent = true
-vim.o.smarttab = true
-vim.o.swapfile = false
---vim.o.syntax="on"
-vim.o.tabstop = 4
-vim.o.termguicolors = true
-vim.o.timeoutlen = 500
-vim.o.visualbell = false
-vim.o.wb = false
-vim.o.wrap = true
-vim.wo.cursorline = true
-vim.wo.relativenumber = true
-vim.o.relativenumber = true
-vim.wo.signcolumn = "yes"
+vim.api.nvim_set_option('softtabstop',4)
+vim.api.nvim_set_option('autoindent',true)
+vim.api.nvim_set_option('autoread',true)
+vim.api.nvim_set_option('backup',false)
+vim.api.nvim_set_option('breakindent',true)
+vim.api.nvim_set_option('cmdheight',2)
+vim.api.nvim_set_option('encoding','UTF-8')
+vim.api.nvim_set_option('errorbells',false)
+vim.api.nvim_set_option('expandtab',true)
+vim.api.nvim_set_option('fileformat','unix')
+vim.api.nvim_set_option('fileformats','unix,dos')
+vim.api.nvim_set_option('hidden',true)
+vim.api.nvim_set_option('history',500)
+vim.api.nvim_set_option('hlsearch',true)
+vim.api.nvim_set_option('relativenumber',true)
+--vim.api.nvim_set_option('number',true)
+vim.api.nvim_set_option('ignorecase',true)
+vim.api.nvim_set_option('inccommand','split')
+vim.api.nvim_set_option('incsearch',true)
+vim.api.nvim_set_option('laststatus',2)
+vim.api.nvim_set_option('lazyredraw',true)
+vim.api.nvim_set_option('linebreak',true)
+vim.api.nvim_set_option('magic',true)
+vim.api.nvim_set_option('matchtime',2)
+vim.api.nvim_set_option('mouse','a')
+vim.api.nvim_set_option('ruler',true)
+vim.api.nvim_set_option('scrolloff',5)
+vim.api.nvim_set_option('shiftwidth',4)
+vim.api.nvim_set_option('showmatch',true)
+vim.api.nvim_set_option('showmode',false)
+vim.api.nvim_set_option('smartcase',true)
+vim.api.nvim_set_option('smartindent',false)
+vim.api.nvim_set_option('smarttab',true)
+vim.api.nvim_set_option('swapfile',false)
+vim.api.nvim_set_option('tabstop',4)
+vim.api.nvim_set_option('termguicolors',true)
+vim.api.nvim_set_option('timeoutlen',500)
+vim.api.nvim_set_option('visualbell',false)
+vim.api.nvim_set_option('wb',false)
+vim.api.nvim_set_option('wrap',true)
+vim.api.nvim_set_option('cursorline',true)
+vim.api.nvim_win_set_option(0,'relativenumber',true)
+--vim.api.nvim_win_set_option(0,'number',true)
+vim.api.nvim_set_option('signcolumn','yes')
+vim.api.nvim_set_option('nrformats','unsigned')
 vim.api.nvim_command('filetype plugin on')

@@ -105,6 +105,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<leader>ft', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = "single"})<CR>', opts)
+  vim.api.nvim_set_option('signcolumn','yes')
 end
 
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = "single"})]]
@@ -126,19 +127,21 @@ lsp.diagnosticls.setup {
     on_attach = on_attach,
     filetypes = {"javascript", "typescript"},
     init_options = {
+        filetypes = {javascript = "eslint", typescript = "eslint"},
         linters = {
             eslint = {
+                sourceName = "eslint",
                 command = "./node_modules/.bin/eslint",
-                rootPatterns = {".git"},
+                rootPatterns = {".eslint.js", "package.json"},
                 debounce = 100,
                 args = {
+                    "--cache",
                     "--stdin",
                     "--stdin-filename",
                     "%filepath",
                     "--format",
                     "json"
                 },
-                sourceName = "eslint",
                 parseJson = {
                     errorsRoot = "[0].messages",
                     line = "line",
