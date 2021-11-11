@@ -7,10 +7,12 @@ require('telescope').setup {
     }
 }
 require('telescope').load_extension('fzf')
-vim.api.nvim_exec(
-[[
-nnoremap <silent><leader>ff <cmd>lua require('telescope.builtin').find_files()<CR>
-nnoremap <silent><leader>fg <cmd>lua require('telescope.builtin').live_grep()<CR>
-nnoremap <silent><leader>fb <cmd>lua require('telescope.builtin').buffers()<CR>
-nnoremap <silent><leader>fh <cmd>lua require('telescope.builtin').help_tags()<CR>
-]],false)
+
+local function setKeymap(key, command)
+    return vim.api.nvim_set_keymap("n", key, command, {noremap = true, silent = true})
+end
+
+setKeymap("<leader>ff", "<Cmd>lua require('telescope.builtin').find_files()<CR>")
+setKeymap("<leader>fg", "<Cmd>lua require('telescope.builtin').live_grep()<CR>")
+setKeymap("<leader>fb", "<Cmd>lua require('telescope.builtin').buffers()<CR>")
+setKeymap("<leader>fh", "<Cmd>lua require('telescope.builtin').help_tags()<CR>")

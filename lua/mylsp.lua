@@ -75,14 +75,11 @@ end
 
 vim.lsp.handlers["textDocument/definition"] = goto_definition('split')
 
-local on_attach = function(client, bufnr)
+local common = function(bufnr)
   vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border})
   vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border})
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -105,61 +102,87 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<leader>ft', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = "single"})<CR>', opts)
-  vim.api.nvim_set_option('signcolumn','yes')
+  vim.o.signcolumn='yes'
+end
+local on_attach = function(client, bufnr)
+  common(bufnr)
+end
+local on_attachTS = function(client, bufnr)
+  common(bufnr)
+  local ts_utils = require("nvim-lsp-ts-utils")
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+  ts_utils.setup {
+    update_imports_on_move = true,
+  }
 end
 
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = "single"})]]
+vim.cmd [[autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = "single"})]]
 
 --lsp.rome.setup{
 --    capabilities = capabilities,
 --    on_attach = on_attach
 --}
-lsp.tsserver.setup{
+lsp.rnix.setup{
     capabilities = capabilities,
     on_attach = on_attach
+}
+lsp.tsserver.setup{
+    capabilities = capabilities,
+    on_attach = on_attachTS
 }
 lsp.ccls.setup{
     capabilities = capabilities,
     on_attach = on_attach
 }
-lsp.diagnosticls.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    filetypes = {"javascript", "typescript"},
-    init_options = {
-        filetypes = {javascript = "eslint", typescript = "eslint"},
-        linters = {
-            eslint = {
-                sourceName = "eslint",
-                command = "./node_modules/.bin/eslint",
-                rootPatterns = {".eslint.js", "package.json"},
-                debounce = 100,
-                args = {
-                    "--cache",
-                    "--stdin",
-                    "--stdin-filename",
-                    "%filepath",
-                    "--format",
-                    "json"
-                },
-                parseJson = {
-                    errorsRoot = "[0].messages",
-                    line = "line",
-                    column = "column",
-                    endLine = "endLine",
-                    endColumn = "endColumn",
-                    message = "[ESLint] ${message} [${ruleId}]",
-                    security = "severity"
-                },
-                securities = {
-                    [2] = "error",
-                    [1] = "warning"
-                }
-            },
-        },
-        filetypes = {
-            javascript = "eslint",
-            typescript = "eslint"
-        }
-    }
+local null_ls = require'null-ls'
+null_ls.config({
+  sources = {
+    null_ls.builtins.formatting.eslint,
+    null_ls.builtins.diagnostics.eslint,
+  },
+})
+require("lspconfig")["null-ls"].setup {
+  capabilities = capabilities,
 }
+--lsp.diagnosticls.setup {
+--    capabilities = capabilities,
+--    on_attach = on_attach,
+--    filetypes = {"javascript", "typescript"},
+--    init_options = {
+--        filetypes = {javascript = "eslint", typescript = "eslint"},
+--        linters = {
+--            eslint = {
+--                sourceName = "eslint",
+--                command = "./node_modules/.bin/eslint",
+--                rootPatterns = {".eslint.js", "package.json"},
+--                debounce = 100,
+--                args = {
+--                    "--cache",
+--                    "--stdin",
+--                    "--stdin-filename",
+--                    "%filepath",
+--                    "--format",
+--                    "json"
+--                },
+--                parseJson = {
+--                    errorsRoot = "[0].messages",
+--                    line = "line",
+--                    column = "column",
+--                    endLine = "endLine",
+--                    endColumn = "endColumn",
+--                    message = "[ESLint] ${message} [${ruleId}]",
+--                    security = "severity"
+--                },
+--                securities = {
+--                    [2] = "error",
+--                    [1] = "warning"
+--                }
+--            },
+--        },
+--        filetypes = {
+--            javascript = "eslint",
+--            typescript = "eslint"
+--        }
+--    }
+--}
