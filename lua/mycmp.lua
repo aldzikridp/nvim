@@ -52,5 +52,7 @@ cmp.setup {
 
   documentation = {
       border = "single"
-    }
+  },
+
+  experimental = {native_menu = true}
 }
