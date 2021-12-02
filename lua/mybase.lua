@@ -39,7 +39,7 @@ vim.api.nvim_set_option('timeoutlen',500)
 vim.api.nvim_set_option('visualbell',false)
 vim.api.nvim_set_option('wb',false)
 vim.api.nvim_set_option('wrap',true)
-vim.api.nvim_set_option('cursorline',true)
+vim.o.cursorline=true
 vim.api.nvim_win_set_option(0,'relativenumber',true)
 --vim.api.nvim_win_set_option(0,'number',true)
 vim.o.signcolumn='yes'
