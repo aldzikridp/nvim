@@ -15,19 +15,18 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   },
 }
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    underline = true,
-    signs = true,
-  }
-)
+
+vim.diagnostic.config({
+  virtual_text = false,
+  underline = true,
+  signs = true,
+})
 
 local signs = { Error = "✖ ", Warning = " ", Hint = " ", Information = "ℹ " }
 
 for type, icon in pairs(signs) do
-  local hl = "LspDiagnosticsSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 -- LSP settings
@@ -36,9 +35,10 @@ local function goto_definition(split_cmd)
   local log = require("vim.lsp.log")
   local api = vim.api
 
-  local handler = function(_, method, result)
+  -- note, this handler style is for neovim 0.5.1/0.6, if on 0.5, call with function(_, method, result)
+  local handler = function(_, result, ctx)
     if result == nil or vim.tbl_isempty(result) then
-      local _ = log.info() and log.info(method, "No location found")
+      local _ = log.info() and log.info(ctx.method, "No location found")
       return nil
     end
 
@@ -86,11 +86,11 @@ local common = function(bufnr)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts={focusable=false, border = "single"}})<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts={focusable=false, border = "single"}})<CR>', opts)
-  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({popup_opts={focusable=false, border = "single"}})<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({popup_opts={focusable=false, border = "single"}})<CR>', opts)
+  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   buf_set_keymap('n', '<leader>ft', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = "single"})<CR>', opts)
+  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float({focusable=false, border = "single"})<CR>', opts)
   vim.o.signcolumn='yes'
 end
 local on_attach = function(client, bufnr)
@@ -106,7 +106,7 @@ local on_attachTS = function(client, bufnr)
   }
 end
 
-vim.cmd [[autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = "single"})]]
+vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(0,{focusable=false, border = "single"})]]
 
 --lsp.rome.setup{
 --    capabilities = capabilities,
