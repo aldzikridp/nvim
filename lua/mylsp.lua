@@ -124,7 +124,7 @@ lsp.ccls.setup{
     capabilities = capabilities,
     on_attach = on_attach
 }
-lsp.kotlin_language_server.setup{
+lsp.r_language_server.setup{
     capabilities = capabilities,
     on_attach = on_attach
 }
