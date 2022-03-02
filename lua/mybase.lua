@@ -33,7 +33,6 @@ vim.api.nvim_set_option('showmode',false)
 vim.api.nvim_set_option('smartcase',true)
 vim.api.nvim_set_option('smartindent',false)
 vim.api.nvim_set_option('smarttab',true)
-vim.api.nvim_set_option('swapfile',false)
 vim.api.nvim_set_option('termguicolors',true)
 vim.api.nvim_set_option('timeoutlen',500)
 vim.api.nvim_set_option('visualbell',false)
@@ -44,6 +43,7 @@ vim.api.nvim_win_set_option(0,'relativenumber',true)
 --vim.api.nvim_win_set_option(0,'number',true)
 vim.o.signcolumn='yes'
 -- If updatetime set to low e.g <4000 PLEASE DISABLE SWAPFILE
-vim.o.updatetime=800
+vim.o.updatetime=500
+vim.api.nvim_set_option('swapfile',false)
 vim.api.nvim_set_option('nrformats','unsigned')
 vim.api.nvim_command('filetype plugin on')
