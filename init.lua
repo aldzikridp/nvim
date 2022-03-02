@@ -11,5 +11,4 @@ require 'mylualine'
 require 'myindentline'
 --require 'myshade'
 require 'mytokyonight'
-require 'mycolorizer'
 vim.o.guifont = "JetBrainsMono Nerd Font:h11"
