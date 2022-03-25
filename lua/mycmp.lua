@@ -1,4 +1,5 @@
 vim.o.completeopt = 'menuone,noselect'
+
 -- luasnip setup
 local luasnip = require 'luasnip'
 require("luasnip/loaders/from_vscode").load()
@@ -54,5 +55,5 @@ cmp.setup {
       border = "single"
   },
 
-  experimental = {native_menu = true}
+  views = {entries = "native"}
 }
