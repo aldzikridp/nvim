@@ -129,44 +129,21 @@ lsp.r_language_server.setup{
     on_attach = on_attach
 }
 
---lsp.diagnosticls.setup {
---    capabilities = capabilities,
---    on_attach = on_attach,
---    filetypes = {"javascript", "typescript"},
---    init_options = {
---        filetypes = {javascript = "eslint", typescript = "eslint"},
---        linters = {
---            eslint = {
---                sourceName = "eslint",
---                command = "./node_modules/.bin/eslint",
---                rootPatterns = {".eslint.js", "package.json"},
---                debounce = 100,
---                args = {
---                    "--cache",
---                    "--stdin",
---                    "--stdin-filename",
---                    "%filepath",
---                    "--format",
---                    "json"
---                },
---                parseJson = {
---                    errorsRoot = "[0].messages",
---                    line = "line",
---                    column = "column",
---                    endLine = "endLine",
---                    endColumn = "endColumn",
---                    message = "[ESLint] ${message} [${ruleId}]",
---                    security = "severity"
---                },
---                securities = {
---                    [2] = "error",
---                    [1] = "warning"
---                }
---            },
---        },
---        filetypes = {
---            javascript = "eslint",
---            typescript = "eslint"
---        }
---    }
---}
+lsp.texlab.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    texlab = {
+      build = {
+        args = { "-pdflua", "-interaction=nonstopmode", "-synctex=1", "%f" },
+        executable = "latexmk",
+	forwardSearchAfter = true,
+        onSave = true
+      },
+      forwardSearch = {
+        executable = "zathura",
+        args = {"--synctex-forward", "%l:1:%f", "%p"}
+      }
+    }
+  }
+}
