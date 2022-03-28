@@ -47,3 +47,13 @@ vim.o.updatetime=500
 vim.api.nvim_set_option('swapfile',false)
 vim.api.nvim_set_option('nrformats','unsigned')
 vim.api.nvim_command('filetype plugin on')
+
+
+-- Sign
+local signs = { Error = "✖ ", Warn = " ", Hint = " ", Info = "ℹ " }
+
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+

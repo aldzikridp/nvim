@@ -22,13 +22,6 @@ vim.diagnostic.config({
   signs = true,
 })
 
-local signs = { Error = "✖ ", Warning = " ", Hint = " ", Information = "ℹ " }
-
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 -- LSP settings
 local function goto_definition(split_cmd)
   local util = vim.lsp.util
@@ -93,9 +86,14 @@ local common = function(bufnr)
   buf_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float({focusable=false, border = "single"})<CR>', opts)
   vim.o.signcolumn='yes'
 end
+
+vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(0,{focusable=false, border = "single"})]]
+
 local on_attach = function(client, bufnr)
   common(bufnr)
 end
+
+--For tsserver
 local on_attachTS = function(client, bufnr)
   common(bufnr)
   local ts_utils = require("nvim-lsp-ts-utils")
@@ -106,7 +104,6 @@ local on_attachTS = function(client, bufnr)
   }
 end
 
-vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(0,{focusable=false, border = "single"})]]
 
 --lsp.rome.setup{
 --    capabilities = capabilities,
