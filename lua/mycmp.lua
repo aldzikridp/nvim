@@ -57,3 +57,15 @@ cmp.setup {
 
   views = {entries = "native"}
 }
+
+cmp.setup.cmdline(':', {
+  sources = {
+    { name = "cmdline" }
+  }
+})
+
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = "buffer" }
+  }
+})
