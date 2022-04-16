@@ -102,9 +102,10 @@ local common = function(bufnr)
   buf_set_keymap('n', '<leader>ft', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('n', '<leader>e', '<cmd>lua mydiagnostic.open_float()<CR>', opts)
   vim.o.signcolumn='yes'
+  vim.api.nvim_create_autocmd({"CursorHold"},{
+    command = "lua mydiagnostic.open_float()",
+  })
 end
-
-vim.cmd [[autocmd CursorHold * lua mydiagnostic.open_float()]]
 
 
 local on_attach = function(client, bufnr)
