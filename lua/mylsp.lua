@@ -57,9 +57,26 @@ end
 
 vim.lsp.handlers["textDocument/definition"] = goto_definition('split')
 
+local myborder = "single"
+local float_opt = { focusable = false, border = myborder}
+local float_win = { float = float_opt }
+_G.mydiagnostic = {}
+
+_G.mydiagnostic.open_float = function()
+  return vim.diagnostic.open_float(0,float_opt)
+end
+
+_G.mydiagnostic.goto_next = function()
+  return vim.diagnostic.goto_next(float_win)
+end
+
+_G.mydiagnostic.goto_prev = function()
+  return vim.diagnostic.goto_prev(float_win)
+end
+
 local common = function(bufnr)
-  vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {focusable = false, border = "single"})
-  vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = "single"})
+  vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, float_opt)
+  vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = myborder})
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -79,15 +96,16 @@ local common = function(bufnr)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({float={focusable=false, border = "single"}})<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({float={focusable=false, border = "single"}})<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua mydiagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua mydiagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   buf_set_keymap('n', '<leader>ft', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float({focusable=false, border = "single"})<CR>', opts)
+  buf_set_keymap('n', '<leader>e', '<cmd>lua mydiagnostic.open_float()<CR>', opts)
   vim.o.signcolumn='yes'
 end
 
-vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(0,{focusable=false, border = "single"})]]
+vim.cmd [[autocmd CursorHold * lua mydiagnostic.open_float()]]
+
 
 local on_attach = function(client, bufnr)
   common(bufnr)
@@ -104,26 +122,17 @@ local on_attachTS = function(client, bufnr)
   }
 end
 
-
---lsp.rome.setup{
---    capabilities = capabilities,
---    on_attach = on_attach
---}
-lsp.rnix.setup{
+local langservers = { 'rnix', 'ccls', 'r_language_server' }
+for _, langserver in ipairs(langservers) do
+  lsp[langserver].setup {
+    on_attach = on_attach,
     capabilities = capabilities,
-    on_attach = on_attach
-}
+  }
+end
+
 lsp.tsserver.setup{
     capabilities = capabilities,
     on_attach = on_attachTS
-}
-lsp.ccls.setup{
-    capabilities = capabilities,
-    on_attach = on_attach
-}
-lsp.r_language_server.setup{
-    capabilities = capabilities,
-    on_attach = on_attach
 }
 
 lsp.texlab.setup{
