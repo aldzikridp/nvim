@@ -51,8 +51,10 @@ cmp.setup {
     { name = "nvim_lua" },
   },
 
-  documentation = {
-      border = "single"
+  window = {
+    documentation = {
+        border = "single"
+    }
   },
 
   views = {entries = "native"}
