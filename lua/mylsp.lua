@@ -63,7 +63,8 @@ local float_win = { float = float_opt }
 _G.mydiagnostic = {}
 
 _G.mydiagnostic.open_float = function()
-  return vim.diagnostic.open_float(0,float_opt)
+  float_opt.scope = "cursor"
+  return vim.diagnostic.open_float(0, float_opt)
 end
 
 _G.mydiagnostic.goto_next = function()
