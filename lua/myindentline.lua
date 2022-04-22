@@ -1,32 +1,35 @@
 vim.opt.list = true
 
 require("indent_blankline").setup {
-    use_treesitter = true,
-    show_current_context = true,
-    show_current_context_start = false,
-    show_trailing_blankline_indent = false,
-    buftype_exclude = {'terminal', 'nofile'},
-    filetype_exclude = {'help', 'lspinfo', 'checkhealth', 'markdown', ''},
-    -- To get pattern below cursor use
+  use_treesitter = true,
+  show_current_context = true,
+  show_current_context_start = false,
+  show_trailing_blankline_indent = false,
+  buftype_exclude = {'terminal', 'nofile'},
+  filetype_exclude = {'help', 'lspinfo', 'checkhealth', 'markdown', ''},
+  -- To get pattern below cursor use
   -- lua print(require 'nvim-treesitter.ts_utils'.get_node_at_cursor():type())
-    context_patterns = {
-        'export_clause',
-        'object',
-        'template_string',
-        'property_identifier',
-        'statement_block',
-        'try_statement',
-        'class',
-        'function',
-        'method',
-        'do_block',
-        '^for',
-        '^while',
-        'catch_clause',
-        'arguments',
-        'array',
-        'expression_statement',
-    },
+  context_patterns = {
+    'export_clause',
+    'object',
+    'template_string',
+    'property_identifier',
+    'statement_block',
+    'try_statement',
+    'class',
+    'function',
+    'method',
+    'do_block',
+    '^for',
+    '^while',
+    'catch_clause',
+    'arguments',
+    'array',
+    'expression_statement',
+    'switch_body',
+    'switch_case',
+    'parenthesized_expression',
+  },
 }
 function _G.getNodeType()
   print(require 'nvim-treesitter.ts_utils'.get_node_at_cursor():type())
