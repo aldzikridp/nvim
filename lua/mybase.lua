@@ -50,7 +50,7 @@ vim.api.nvim_command('filetype plugin on')
 
 
 -- Sign
-local signs = { Error = "✖ ", Warn = " ", Hint = " ", Info = "ℹ " }
+local signs = { Error = " ✖", Warn = " ", Hint = " ", Info = " ℹ" }
 
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
