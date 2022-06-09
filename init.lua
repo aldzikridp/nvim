@@ -11,4 +11,6 @@ require 'mylualine'
 require 'myindentline'
 --require 'myshade'
 require 'mytokyonight'
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
 vim.o.guifont = "JetBrainsMono Nerd Font:h11"
