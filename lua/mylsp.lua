@@ -113,7 +113,7 @@ local on_attach = function(client, bufnr)
   common(bufnr)
 end
 
-local langservers = { 'rnix', 'ccls', 'r_language_server' }
+local langservers = { 'rnix', 'ccls', 'r_language_server', 'rust_analyzer' }
 for _, langserver in ipairs(langservers) do
   lsp[langserver].setup {
     on_attach = on_attach,
@@ -143,7 +143,7 @@ lsp.texlab.setup{
       build = {
         args = { "-pdflua", "-interaction=nonstopmode", "-synctex=1", "%f" },
         executable = "latexmk",
-	forwardSearchAfter = true,
+        forwardSearchAfter = true,
         onSave = true
       },
       forwardSearch = {
