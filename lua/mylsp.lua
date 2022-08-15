@@ -140,6 +140,7 @@ lsp.texlab.setup{
   on_attach = on_attach,
   settings = {
     texlab = {
+      rootDirectory = vim.fn.getcwd(),
       build = {
         args = { "-pdflua", "-interaction=nonstopmode", "-synctex=1", "%f" },
         executable = "latexmk",
