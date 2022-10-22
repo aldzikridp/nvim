@@ -100,7 +100,7 @@ local common = function(bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua mydiagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua mydiagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-  buf_set_keymap('n', '<leader>ft', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', '<leader>ft', '<cmd>lua vim.lsp.buf.format({async=true})<CR>', opts)
   buf_set_keymap('n', '<leader>e', '<cmd>lua mydiagnostic.open_float()<CR>', opts)
   vim.o.signcolumn='yes'
   vim.api.nvim_create_autocmd({"CursorHold"},{
