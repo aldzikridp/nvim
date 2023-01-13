@@ -3,6 +3,14 @@ local function setKeymap(key, command)
 end
 
 require'fzf-lua'.setup {
+  winopts = {
+    preview = { default = 'bat' },
+  },
+  previewers = {
+    bat = {
+      theme = 'TwoDark'
+    },
+  },
   grep = { multiprocess = true },
   files = { multiprocess = true },
   git = { files = { multiprocess = true } },
