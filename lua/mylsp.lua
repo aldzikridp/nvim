@@ -121,6 +121,12 @@ for _, langserver in ipairs(langservers) do
   }
 end
 
+require'lspconfig'.clangd.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  cmd = { "clangd", "--query-driver=/run/current-system/sw/bin/gcc" },
+}
+
 lsp.tsserver.setup{
     capabilities = capabilities,
     on_attach = function(client, bufnr)

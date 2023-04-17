@@ -1,5 +1,6 @@
 require 'mybase'
 --require 'myplugins'
+require 'mytokyonight'
 require 'mybufferline'
 require 'myluatree'
 require 'mytreesitter'
@@ -10,5 +11,4 @@ require 'mycmp'
 require 'mylualine'
 require 'myindentline'
 --require 'myshade'
-require 'mytokyonight'
 vim.o.guifont = "JetBrainsMono Nerd Font:h11"
