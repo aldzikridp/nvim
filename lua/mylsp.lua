@@ -113,19 +113,19 @@ local on_attach = function(client, bufnr)
   common(bufnr)
 end
 
-local langservers = { 'rnix', 'ccls', 'r_language_server', 'rust_analyzer' }
+local langservers = { 
+  'ccls'
+  ,'clangd'
+  ,'nil_ls'
+  ,'r_language_server'
+  ,'rust_analyzer' 
+}
 for _, langserver in ipairs(langservers) do
   lsp[langserver].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
-
-require'lspconfig'.clangd.setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  cmd = { "clangd", "--query-driver=/run/current-system/sw/bin/gcc" },
-}
 
 lsp.tsserver.setup{
     capabilities = capabilities,

@@ -29,6 +29,11 @@ require("indent_blankline").setup {
     'switch_body',
     'switch_case',
     'parenthesized_expression',
+    'table_constructor',
+    'compound_statement',
+    'attrset_expression',
+    'indented_string_expression',
+    'list_expression',
   },
 }
 function _G.getNodeType()
