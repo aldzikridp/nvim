@@ -13,7 +13,7 @@ require'fzf-lua'.setup {
   },
   files = {
     multiprocess = true,
-    cmd = [[printf "%s\0" */ | parallel -0 'find {} -printf "%P\n"']]
+    cmd = [[printf "%s\0" */ | parallel -0 "find {} -type f -not -path '*/\.git/*'"]]
   },
   grep = { multiprocess = true },
   git = { files = { multiprocess = true } },
