@@ -11,8 +11,11 @@ require'fzf-lua'.setup {
       theme = 'TwoDark'
     },
   },
+  files = {
+    multiprocess = true,
+    cmd = [[printf "%s\0" */ | parallel -0 'find {} -printf "%P\n"']]
+  },
   grep = { multiprocess = true },
-  files = { multiprocess = true },
   git = { files = { multiprocess = true } },
 }
 
