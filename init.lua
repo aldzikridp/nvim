@@ -10,5 +10,6 @@ require 'mynullls'
 require 'mycmp'
 require 'mylualine'
 require 'myindentline'
+require 'myhttp'
 --require 'myshade'
 vim.o.guifont = "JetBrainsMono Nerd Font:h11"
