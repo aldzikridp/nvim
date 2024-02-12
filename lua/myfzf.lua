@@ -2,6 +2,14 @@ local function setKeymap(key, command)
     return vim.api.nvim_set_keymap("n", key, command, {noremap = true, silent = true})
 end
 
+local function isGnuFind()
+  if vim.loop.os_uname().sysname == "Linux" then
+    return [[printf "%s\0" */ | parallel -0 "find {} -type f -not -path '*/\.git/*'"]]
+  else
+    return "fd"
+  end
+end
+
 require'fzf-lua'.setup {
   winopts = {
     preview = { default = 'bat' },
@@ -13,7 +21,7 @@ require'fzf-lua'.setup {
   },
   files = {
     multiprocess = true,
-    cmd = [[printf "%s\0" */ | parallel -0 "find {} -type f -not -path '*/\.git/*'"]]
+    cmd = isGnuFind()
   },
   grep = { multiprocess = true },
   files = { multiprocess = true },
