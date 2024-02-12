@@ -1,3 +1,6 @@
+if vim.loop.os_uname().version:match("NixOS") ~= "NixOS" then
+  require 'mypaq'
+end
 require 'mybase'
 --require 'myplugins'
 require 'mytokyonight'
@@ -6,7 +9,7 @@ require 'myluatree'
 require 'mytreesitter'
 require 'myfzf'
 require 'mylsp'
-require 'mynullls'
+--require 'mynullls'
 require 'mycmp'
 require 'mylualine'
 require 'myindentline'
