@@ -140,23 +140,3 @@ lsp.tsserver.setup{
     end
 
 }
-
-lsp.texlab.setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    texlab = {
-      rootDirectory = vim.fn.getcwd(),
-      build = {
-        args = { "-pdflua", "-interaction=nonstopmode", "-synctex=1", "%f" },
-        executable = "latexmk",
-        forwardSearchAfter = true,
-        onSave = true
-      },
-      forwardSearch = {
-        executable = "zathura",
-        args = {"--synctex-forward", "%l:1:%f", "%p"}
-      }
-    }
-  }
-}
