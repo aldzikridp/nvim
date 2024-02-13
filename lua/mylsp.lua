@@ -126,17 +126,3 @@ for _, langserver in ipairs(langservers) do
     capabilities = capabilities,
   }
 end
-
-lsp.tsserver.setup{
-    capabilities = capabilities,
-    on_attach = function(client, bufnr)
-      common(bufnr)
-      local ts_utils = require("nvim-lsp-ts-utils")
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
-      ts_utils.setup {
-        update_imports_on_move = true,
-      }
-    end
-
-}
