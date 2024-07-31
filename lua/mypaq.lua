@@ -42,7 +42,6 @@ bootstrap_paq {
   "nvim-treesitter/nvim-treesitter-refactor",
   "nvim-treesitter/nvim-treesitter-textobjects",
   "nvim-lua/plenary.nvim",
-  "rest-nvim/rest.nvim",
   "folke/tokyonight.nvim",
   "lewis6991/gitsigns.nvim",
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
