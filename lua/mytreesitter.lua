@@ -1,7 +1,12 @@
-require"nvim-treesitter.install".compilers = {"gcc"}
+local ts = require 'nvim-treesitter'
+
+if vim.loop.os_uname().sysname ~= "Linux" then
+  ts.install.compilers = {"gcc"}
+elseif vim.loop.os_uname().sysname ~= "Darwin" then
+  ts.install.compilers = {"clang++"}
+end
 --require 'nvim-treesitter.install'.compilers = { 'clang++'}
-local ts = require 'nvim-treesitter.configs'
-ts.setup {
+ts.configs.setup {
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
