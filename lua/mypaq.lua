@@ -44,7 +44,7 @@ bootstrap_paq {
   "nvim-lua/plenary.nvim",
   "folke/tokyonight.nvim",
   "lewis6991/gitsigns.nvim",
-  "oysandvik94/curl.nvim"
+  "oysandvik94/curl.nvim",
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   -- List your packages
 }
