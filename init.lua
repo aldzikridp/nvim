@@ -12,4 +12,5 @@ require 'mycmp'
 require 'mylualine'
 require 'myindentline'
 --require 'mykulala'
+require 'mycurl'
 require 'gitsigns'.setup()
