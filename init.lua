@@ -1,5 +1,7 @@
 if vim.loop.os_uname().version:match("NixOS") ~= "NixOS" then
   require 'mypaq'
+else
+  require  'myhttp'
 end
 require 'mybase'
 require 'mytokyonight'
@@ -12,6 +14,5 @@ require 'mycmp'
 require 'mylualine'
 require 'myindentline'
 --require 'mykulala'
-require 'mycurl'
---require  'myhttp'
+--require 'mycurl'
 require 'gitsigns'.setup()
