@@ -116,9 +116,8 @@ end
 local langservers = { 
   'ccls'
   --,'clangd'
-  ,'nil_ls'
-  ,'r_language_server'
-  ,'rust_analyzer' 
+  ,'nixd'
+  ,'docker_language_server'
 }
 for _, langserver in ipairs(langservers) do
   lsp[langserver].setup {
