@@ -161,9 +161,17 @@ local langservers = {
   --
 
 }
-for _, langserver in ipairs(langservers) do
-  require('lspconfig')[langserver].setup {
-    capabilities = capabilities,
-  }
-end
-
+--for _, langserver in ipairs(langservers) do
+--  require('lspconfig')[langserver].setup {
+--    capabilities = capabilities,
+--  }
+--  vim.lsp.config.[langserver] = {
+--    capabilities = capabilities
+--  }
+--end
+vim.lsp.config('*', {
+  capabilities = capabilities,
+})
+vim.lsp.enable('dockerls')
+vim.lsp.enable('nixd')
+vim.lsp.enable('ccls')
