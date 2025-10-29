@@ -145,7 +145,7 @@ local langservers = {
   'ccls'
   --,'clangd'
   ,'nixd'
-  ,'docker_language_server'
+  ,'dockerls'
 
   -- clangd = {},
   -- gopls = {},
@@ -172,6 +172,23 @@ local langservers = {
 vim.lsp.config('*', {
   capabilities = capabilities,
 })
-vim.lsp.enable('dockerls')
-vim.lsp.enable('nixd')
-vim.lsp.enable('ccls')
+for _, langserver in ipairs(langservers) do
+  vim.lsp.enable(langserver)
+end
+
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "✖ ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.INFO] = "󰋼 ",
+      [vim.diagnostic.severity.HINT] = "󰌵 ",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.HINT] = "",
+      [vim.diagnostic.severity.INFO] = "",
+    },
+  },
+})
