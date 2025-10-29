@@ -103,14 +103,14 @@ vim.diagnostic.config {
   severity_sort = true,
   float = { border = 'rounded', source = 'if_many' },
   underline = { severity = vim.diagnostic.severity.ERROR },
-  signs = vim.g.have_nerd_font and {
+  signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = '󰅚 ',
-      [vim.diagnostic.severity.WARN] = '󰀪 ',
-      [vim.diagnostic.severity.INFO] = '󰋽 ',
-      [vim.diagnostic.severity.HINT] = '󰌶 ',
+      [vim.diagnostic.severity.ERROR] = "✖ ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.INFO] = "󰋼 ",
+      [vim.diagnostic.severity.HINT] = "󰌵 ",
     },
-  } or {},
+  },
   virtual_text = {
     source = 'if_many',
     spacing = 2,
@@ -132,32 +132,30 @@ vim.diagnostic.config {
 --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+vim.lsp.config('*', {
+  capabilities = capabilities,
+})
+
 local langservers = {
   'ccls'
   --,'clangd'
   ,'nixd'
   ,'dockerls'
+  ,'lua_ls'
+  ,'helm_ls'
 }
-vim.lsp.config('*', {
-  capabilities = capabilities,
-})
 for _, langserver in ipairs(langservers) do
   vim.lsp.enable(langserver)
 end
 
-vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "✖ ",
-      [vim.diagnostic.severity.WARN] = " ",
-      [vim.diagnostic.severity.INFO] = "󰋼 ",
-      [vim.diagnostic.severity.HINT] = "󰌵 ",
-    },
-    numhl = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN] = "",
-      [vim.diagnostic.severity.HINT] = "",
-      [vim.diagnostic.severity.INFO] = "",
-    },
-  },
+vim.lsp.config('yamlls', {
+  capabilities = capabilities,
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/v1.32.1-standalone-strict/all.json"] = "/*.k8s.yaml"
+      }
+    }
+  }
 })
+vim.lsp.enable('yamlls')
