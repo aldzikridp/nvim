@@ -148,6 +148,16 @@ for _, langserver in ipairs(langservers) do
   vim.lsp.enable(langserver)
 end
 
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" }
+      }
+    }
+  }
+})
+
 vim.lsp.config('yamlls', {
   capabilities = capabilities,
   settings = {

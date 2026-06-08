@@ -4,26 +4,26 @@ elseif vim.loop.os_uname().sysname ~= "Darwin" then
   require 'nvim-treesitter.install'.compilers = { 'clang++'}
 end
 
-local ts = require 'nvim-treesitter.configs'
-ts.setup {
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = false,
-    },
-    indent = {enable = true},
-    incremental_selection = {
-       enable = true,
-       keymaps = {
-          init_selection = "gnn",
-          node_incremental = "gmn",
-          scope_incremental = "gmc",
-          node_decremental = "gmm",
-       },
-    },
-  refactor = {
-    highlight_definitions = { enable = true },
-    highlight_current_scope = { enable = false },
-  },
+--local ts = require 'nvim-treesitter.configs'
+--ts.setup {
+--    highlight = {
+--      enable = true,
+--      additional_vim_regex_highlighting = false,
+--    },
+--    indent = {enable = true},
+--    incremental_selection = {
+--       enable = true,
+--       keymaps = {
+--          init_selection = "gnn",
+--          node_incremental = "gmn",
+--          scope_incremental = "gmc",
+--          node_decremental = "gmm",
+--       },
+--    },
+--  refactor = {
+--    highlight_definitions = { enable = true },
+--    highlight_current_scope = { enable = false },
+--  },
 --  textobjects = {
 --    select = {
 --        enable = true,
@@ -67,5 +67,5 @@ ts.setup {
 --      },
 --    },
 --  },
-}
+--}
 
