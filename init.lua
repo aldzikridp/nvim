@@ -1,13 +1,13 @@
 if vim.loop.os_uname().version:match("NixOS") ~= "NixOS" then
-  require 'mypaq'
+  require 'mypack'
 else
   require  'myhttp'
+  require 'mytreesitter2'
 end
 require 'mybase'
 require 'mytokyonight'
 require 'mybufferline'
 require 'myluatree'
-require 'mytreesitter2'
 require 'myfzf'
 require 'mylsp-ng'
 require 'mycmp'

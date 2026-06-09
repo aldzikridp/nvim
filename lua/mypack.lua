@@ -41,7 +41,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
 ---@return string
 local function gh(repo) return 'https://github.com/' .. repo end
 
-vim.pack.add { gh "savq/paq-nvim" }
 vim.pack.add { gh "akinsho/bufferline.nvim" }
 vim.pack.add { gh "hrsh7th/nvim-cmp" }
 vim.pack.add { gh "saadparwaiz1/cmp_luasnip" }
@@ -58,9 +57,11 @@ vim.pack.add { gh "l3mon4d3/luasnip" }
 vim.pack.add { gh "lukas-reineke/indent-blankline.nvim" }
 vim.pack.add { gh "neovim/nvim-lspconfig" }
 vim.pack.add { gh "nvim-tree/nvim-tree.lua" }
-vim.pack.add { gh "nvim-treesitter/nvim-treesitter-refactor" }
-vim.pack.add { gh "nvim-treesitter/nvim-treesitter-textobjects" }
+--vim.pack.add { gh "nvim-treesitter/nvim-treesitter-refactor" }
+--vim.pack.add { gh "nvim-treesitter/nvim-treesitter-textobjects" }
 vim.pack.add { gh "nvim-lua/plenary.nvim" }
 vim.pack.add { gh "folke/tokyonight.nvim" }
 vim.pack.add { gh "lewis6991/gitsigns.nvim" }
-vim.pack.add ({ src = (gh "nvim-treesitter/nvim-treesitter"), version = 'main' })
+--vim.pack.add { gh "nvim-treesitter/nvim-treesitter" }
+vim.pack.add { gh "romus204/tree-sitter-manager.nvim" }
+require("tree-sitter-manager").setup()
