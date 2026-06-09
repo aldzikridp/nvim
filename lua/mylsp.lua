@@ -142,7 +142,6 @@ local langservers = {
   ,'nixd'
   ,'dockerls'
   ,'lua_ls'
-  ,'helm_ls'
   ,'yamlls'
 }
 for _, langserver in ipairs(langservers) do

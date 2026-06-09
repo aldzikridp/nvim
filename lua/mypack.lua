@@ -62,6 +62,7 @@ vim.pack.add { gh "nvim-tree/nvim-tree.lua" }
 vim.pack.add { gh "nvim-lua/plenary.nvim" }
 vim.pack.add { gh "folke/tokyonight.nvim" }
 vim.pack.add { gh "lewis6991/gitsigns.nvim" }
+vim.pack.add { gh "qvalentin/helm-ls.nvim" }
 --vim.pack.add { gh "nvim-treesitter/nvim-treesitter" }
 vim.pack.add { gh "romus204/tree-sitter-manager.nvim" }
 require("tree-sitter-manager").setup()
