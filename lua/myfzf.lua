@@ -1,6 +1,4 @@
-local function setKeymap(key, command)
-    return vim.api.nvim_set_keymap("n", key, command, {noremap = true, silent = true})
-end
+local keymap = require('keymap')
 
 local function isGnuFind()
   if vim.loop.os_uname().sysname == "Linux" then
@@ -21,18 +19,17 @@ require'fzf-lua'.setup {
   },
   files = {
     multiprocess = true,
-    cmd = isGnuFind()
+    cmd = "fd"
   },
   grep = { multiprocess = true },
-  files = { multiprocess = true },
   git = { files = { multiprocess = true } },
 }
 
-setKeymap("<leader>ff", "<Cmd>lua require('fzf-lua').files()<CR>")
-setKeymap("<leader>fg", "<Cmd>lua require('fzf-lua').live_grep_native()<CR>")
-setKeymap("<leader>fc", "<Cmd>lua require('fzf-lua').lgrep_curbuf()<CR>")
-setKeymap("<leader>fb", "<Cmd>lua require('fzf-lua').buffers()<CR>")
-setKeymap("<leader>fh", "<Cmd>lua require('fzf-lua').help_tags()<CR>")
-setKeymap("<leader>fr", "<Cmd>lua require('fzf-lua').registers()<CR>")
-setKeymap("<leader>fm", "<Cmd>lua require('fzf-lua').marks()<CR>")
-setKeymap("<leader>fp", "<Cmd>lua require('fzf-lua').grep_project()<CR>")
+keymap.setKeymap("<leader>ff", "<Cmd>lua require('fzf-lua').files()<CR>")
+keymap.setKeymap("<leader>fg", "<Cmd>lua require('fzf-lua').live_grep_native()<CR>")
+keymap.setKeymap("<leader>fc", "<Cmd>lua require('fzf-lua').lgrep_curbuf()<CR>")
+keymap.setKeymap("<leader>fb", "<Cmd>lua require('fzf-lua').buffers()<CR>")
+keymap.setKeymap("<leader>fh", "<Cmd>lua require('fzf-lua').help_tags()<CR>")
+keymap.setKeymap("<leader>fr", "<Cmd>lua require('fzf-lua').registers()<CR>")
+keymap.setKeymap("<leader>fm", "<Cmd>lua require('fzf-lua').marks()<CR>")
+keymap.setKeymap("<leader>fp", "<Cmd>lua require('fzf-lua').grep_project()<CR>")

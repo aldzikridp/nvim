@@ -3,7 +3,8 @@ vim.o.completeopt = 'menuone,noselect'
 -- luasnip setup
 local luasnip = require 'luasnip'
 require("luasnip/loaders/from_vscode").load()
-local set_keymap = vim.api.nvim_set_keymap
+local keymap = require('keymap')
+local set_keymap = keymap.setKeymap
 local cmp = require "cmp"
 cmp.setup {
   snippet = {
