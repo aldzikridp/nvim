@@ -19,7 +19,6 @@ require'fzf-lua'.setup {
   },
   files = {
     multiprocess = true,
-    cmd = "fd"
   },
   grep = { multiprocess = true },
   git = { files = { multiprocess = true } },
